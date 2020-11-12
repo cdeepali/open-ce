@@ -202,10 +202,11 @@ def _add_build_command_dependencies(variant_build_commands, build_commands, star
     # the recipes index as values.
     packages = dict()
     index = 0
-    for count, build_command in enumerate( variant_build_commands):
+    #TODO: remove debug prints
+    for var_index, build_command in enumerate(variant_build_commands):
         if build_command in build_commands:
             alternateindex = build_commands.index(build_command)
-            print("ALTERNATE INDEX = %s for index =%s indexbeingdecremented=%s" %(alternateindex, count,index))
+            print("ALTERNATE INDEX = %s for index =%s indexbeingdecremented=%s" %(alternateindex, var_index , index))
             for package in build_command.packages:
                 packages.update({ package : [alternateindex] + packages.get(package, []) })
         else:
