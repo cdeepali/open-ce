@@ -186,7 +186,7 @@ def _get_package_dependencies(path, variant_config_files, variants):
 
     return packages, run_deps, host_deps, build_deps, test_deps, used_vars, noarch, string
 
-def _add_build_command_dependencies(build_commands, start_index=0):
+def _add_build_command_dependencies(variant_build_commands, build_commands, start_index=0):
     """
     Create a dependency tree for a list of build commands.
 
@@ -201,13 +201,26 @@ def _add_build_command_dependencies(build_commands, start_index=0):
     # Create a packages dictionary that uses all of a recipe's packages as key, with
     # the recipes index as values.
     packages = dict()
-    for index, build_command in enumerate(build_commands):
-        for package in build_command.packages:
-            packages.update({ package : [start_index + index] + packages.get(package, []) })
+    index = 0
+    for count, build_command in enumerate( variant_build_commands):
+        if build_command in build_commands:
+            alternateindex = build_commands.index(build_command)
+            print("ALTERNATE INDEX = %s for index =%s indexbeingdecremented=%s" %(alternateindex, count,index))
+            for package in build_command.packages:
+                packages.update({ package : [alternateindex] + packages.get(package, []) })
+        else:
+            print("INDEX = %s" %(index))
+            for package in build_command.packages:
+                packages.update({ package : [start_index + index] + packages.get(package, []) })
+            index +=1
+
+    for build_command in variant_build_commands:
+        if build_command in build_commands:
+            variant_build_commands.pop(variant_build_commands.index(build_command))
 
     # Add a list of indices for dependency to a BuildCommand's `build_command_dependencies` value
     # Note: This will filter out all dependencies that aren't in the recipes list.
-    for index, build_command in enumerate(build_commands):
+    for index, build_command in enumerate(variant_build_commands):
         deps = []
         dependencies = set()
         dependencies.update({utils.remove_version(dep) for dep in build_command.run_dependencies})
@@ -316,10 +329,10 @@ class BuildTree(): #pylint: disable=too-many-instance-attributes
             self._test_commands[variant_string] = test_commands
 
             # Add dependency tree information to the packages list
-            _add_build_command_dependencies(build_commands, len(self.build_commands))
+            _add_build_command_dependencies(build_commands, self.build_commands, len(self.build_commands))
 
             # Remove build commands from variant_recipes that are already in self.build_commands
-            _remove_duplicate_build_commands(build_commands, self.build_commands)
+            #_remove_duplicate_build_commands(build_commands, self.build_commands)
             self.build_commands += build_commands
         self._detect_cycle()
 
