@@ -238,6 +238,8 @@ thinc:
   - 8.0.3
 tokenizers:
   - 0.9.3
+torchmetrics:
+  - 0.3.* 
 torchtext:
   - 0.9.*
 torchvision:
