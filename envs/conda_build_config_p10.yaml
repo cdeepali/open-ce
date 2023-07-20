@@ -7,4 +7,3 @@ cpu_opt_tune:
 vector_settings:
   - no-pcrel                # [ppc64le]
 setuptools:
-  - 63.*
