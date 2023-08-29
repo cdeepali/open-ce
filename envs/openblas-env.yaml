@@ -12,6 +12,7 @@ packages:
       - feedstock-patches/openmp/0002-disable-LIBOMPTARGET-to-fix-build-on-baremetal.patch
       - feedstock-patches/openmp/0003-P10-changes.patch
       - feedstock-patches/openmp/0004-Updated-openmp-to-14.0.6.patch
-  - feedstock : openblas
+  - feedstock : https://github.com/npanpaliya/openblas-feedstock
+    git_tag : use-limit-build-resource-var
 {% endif %}
 git_tag_for_env: open-ce-v1.10.0
