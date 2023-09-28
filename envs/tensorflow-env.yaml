@@ -30,6 +30,7 @@ packages:
       - feedstock-patches/grpcio/0001-Updated-to-1.53.0.patch
   - feedstock : keras
   - feedstock : tensorflow
+    git_tag : 02cce0483e495cb590a6b8512f76066e2b1300eb
   - feedstock : dm-tree
   - feedstock : tensorflow-probability
   - feedstock : tensorflow-estimator
