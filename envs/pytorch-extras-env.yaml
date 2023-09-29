@@ -7,6 +7,7 @@ imported_envs:
 packages:
 {% if not s390x %}
   - feedstock : pytorch-lightning
+    git_tag : 90aa3852414556b266c8503de5619d1d76b1bebe
   - feedstock : pytorch-lightning-bolts
   - feedstock : libflac
   - feedstock : libsndfile
