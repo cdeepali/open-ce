@@ -74,7 +74,7 @@ eigen:
 ffmpeg:
   - 4.2.*
 flatbuffers:
-  - 23.5.26
+  - 23.1.21
 fmt:
   - 9.1.0
 freetype:
@@ -206,7 +206,7 @@ onnxconverter_common:
 onnx_graphsurgeon:
   - 0.2.*
 openblas:
-  - 0.3.24.*      #[not s390x]
+  - 0.3.26.*      #[not s390x]
   - 0.3.21.*      #[s390x]
 opencv:
   - 4.8.*
