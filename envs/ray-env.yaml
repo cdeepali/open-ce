@@ -31,5 +31,7 @@ packages:
     git_tag : 29535305e9e7456f6b82758366a581cfa8512bfd
     patches :
       - feedstock-patches/opencensus/0001-Remove-constraint-from-google-api-core.patch 
-  - feedstock : ray-packages
+#  - feedstock : ray-packages
+  - feedstock : https://github.com/Archana-Shinde1/ray-packages-feedstock
+    git_tag: cc6cce794ae8352e3d5ffc26a82b28b2b8c275c9
 {% endif %}
